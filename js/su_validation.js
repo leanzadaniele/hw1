@@ -56,16 +56,29 @@ function checkEmail(){
 }
 
 function checkPass(){
+    console.log("checkpass");
     if(passF.value.length >0){
-        errDiv.classList.add("hidden");
-        formChecks.password = true;
+            var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,16}$/;
+            if(re.test(passF.value)){
+                console.log("ok");
+                errDiv.classList.add("hidden");
+                formChecks.password = true;
+            }
+            else{
+                errMsg.textContent="requisiti: tra 8 e 16 caratteri, almeno una minuscola, una maiuscola, un numero ed un carattere speciale.";
+                errDiv.classList.remove("hidden");
+                passF.classList.add("error");
+                formChecks.password = false;
+                console.log("err");
+            }
     }
     else{
         errMsg.textContent="scrivi una password";
         errDiv.classList.remove("hidden");
         passF.classList.add("error");
-        formChecks.password = true;
+        formChecks.password = false;
     }
+
 }
 
 function checkPassVALIDATOR(){
